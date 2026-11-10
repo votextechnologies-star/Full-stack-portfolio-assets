@@ -1,0 +1,372 @@
+<style>{`
+      @keyframes ctaSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .cta-ring { animation: ctaSpin var(--cta-spin-duration, 10s) linear infinite; transform-origin: center; }
+      .cta-wrap:hover .cta-ring { --cta-spin-duration: 3s; }
+      .cta-wrap { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+      .cta-wrap:hover { transform: scale(1.08); }
+    `}</style>
+    <a href="#contact" className="cta-wrap group relative flex items-center justify-center w-[130px] h-[130px]" aria-label="Get in touch">
+      <svg viewBox="0 0 130 130" className="absolute inset-0 w-full h-full pointer-events-none">
+        <circle cx="65" cy="65" r="62" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" />
+      </svg>
+      <svg viewBox="0 0 130 130" className="cta-ring absolute inset-0 w-full h-full pointer-events-none">
+        <defs>
+          <path id="cta-circle-path" d="M65,65 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0" />
+        </defs>
+        <text fill="rgba(255,255,255,1)" fontSize="8.5" fontFamily="'Inter', sans-serif" fontWeight="900" letterSpacing="4">
+          <textPath href="#cta-circle-path">GET IN TOUCH · GET IN TOUCH · GET IN TOUCH ·&nbsp;</textPath>
+        </text>
+      </svg>
+      <span className="absolute inset-4 rounded-full bg-white scale-0 group-hover:scale-100 transition-transform duration-500 ease-in-out" style={{ transformOrigin: "center" }} />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10 w-6 h-6 text-white group-hover:text-black" style={{ transition: "color 0.3s ease" }}>
+        <path d="M7 17L17 7M17 7H7M17 7v10" />
+      </svg>
+    </a>
+
+
+<svg className="relative w-3 h-3 text-white group-hover:text-black transition-colors duration-300 z-10" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                <path d="M1 6h10M6 1l5 5-5 5" />
+                            </svg>
+
+const projects = [
+  {
+    id: "001",
+    title: "Enterprise Resource Architecture",
+    stack: "React / Node.js / Firebase / Firestore",
+    description: "A full-stack ERP engine automating multi-currency invoicing, inventory logic, and international tax compliance for distributed teams.",
+    links: { live: "https://erpbeta.netlify.app", code: "#" },
+    image: "/p1.png",
+    cta: "Live Project"
+  },
+  {
+    id: "002",
+    title: "Geospatial Workforce Analytics",
+    stack: "React / Redux / Google Maps API/ Firebase",
+    description: "Real-time tracking system implementing location-based validation protocols and live route visualization for workforce monitoring.",
+    links: { live: "#", code: "#" },
+    image: "/p2.png",
+    cta: "Live Project"
+  },
+  {
+    id: "003",
+    title: "OrderEase: Real-time online table food ordering system",
+    stack: "React / Firebase / Node.js",
+    description: "A real-time restaurant table ordering system that allows customers to place food orders directly from their table while enabling admins to manage menus, waiters, and assign waiters to customers for seamless service coordination.",
+    links: { live: "https://github.com/MAHESHPPAI/OrderEase", code: "#" },
+    image: "./p3.png",
+    cta: "View on Github"
+  },
+  {
+    id: "004",
+    title: "BusBuddy: Transit Management Logic",
+    stack: "React / Firebase / Springboot / ngrok",
+    description: "A real-time campus transportation platform that enables students to book seats and track buses live, drivers to stream GPS data during journeys, and transport officers to manage fleet availability, monitoring, and notifications seamlessly.",
+    links: { live: "https://github.com/MAHESHPPAI/Busbuddy-latest", code: "#" },
+    image: "./p4.png",
+    cta: "View on Github"
+  },
+];
+
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .marquee__part {
+        /* Reduce gap between loop iterations on tablet */
+        padding-right: 4vw;
+    }
+
+    .marquee__icon-box {
+        /* Tighter margin between different skills */
+        margin: 0 3vw;
+        /* Clearer separation between Icon and Text */
+        gap: 1.2rem;
+    }
+
+    .marquee__icon {
+        height: 4vh;
+        /* Slightly smaller icon to fit nicely */
+    }
+
+    .marquee__text {
+        font-size: 2.2vh;
+        /* Slightly smaller text */
+    }
+}
+
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz6_hmNogiRhIAkAdfWU9q0wQb2WdEvswPCTHCd9U-giehtMTgKcmZq2NsQES-XYuxd/exec";
+
+/* --- MOBILE SPECIFIC (Phones) --- */
+@media (max-width: 768px) {
+    .menu__item {
+        height: 80px;
+    }
+
+    .menu__item-link {
+        font-size: 24px;
+        padding-left: 20px;
+        gap: 10px;
+        /* Smaller gap for arrow on phone */
+    }
+
+    .menu__item-arrow {
+        width: 24px;
+        height: 24px;
+    }
+
+    .marquee__part {
+        padding-right: 40px;
+    }
+
+    .marquee__icon-box {
+        margin: 0 30px;
+        gap: 15px;
+    }
+
+    .marquee__icon {
+        height: 30px;
+    }
+
+    .marquee__text {
+        font-size: 16px;
+    }
+}
+
+<div ref={kineticWheelRef} className="kinetic-wheel pointer-events-none" style={{
+        position: 'fixed',
+        top: isMobile ? '50%' : 'auto',
+        bottom: isMobile ? 'auto' : '-18vh',
+        left: '0',
+        width: '100vw',
+        height: isMobile ? '100vw' : 'auto',
+        marginTop: isMobile ? 'calc(-50vw)' : '0',
+        zIndex: 0,
+        visibility: 'hidden',
+        opacity: 0,
+        willChange: 'transform, opacity',
+      }}>
+        {isMobile ? (
+          <svg viewBox="0 0 1500 2000" className="w-full h-full" style={{ overflow: 'visible' }}>
+            <defs>
+              <linearGradient id="line-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+                <stop offset="15%" stopColor="rgba(255,255,255,0.7)" />
+                <stop offset="85%" stopColor="rgba(255,255,255,0.7)" />
+                <stop offset="100%" stopColor="rgba(255,255,255,0)" />
+              </linearGradient>
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="8" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Sweeping S-Curve (Winding Ribbon) */}
+            <path
+              ref={threadPathRef}
+              d="M 750,0 L 750,250 C 750,550 250,500 250,800 C 250,1100 1250,1050 1250,1350 C 1250,1650 750,1600 750,1900 L 750,3000"
+              fill="none"
+              stroke="url(#line-gradient)"
+              strokeWidth="10"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+
+            <g ref={figureGroupRef}>
+              <text ref={textAnalyzeRef} x="750" y="150" fill="#ffffff" style={{ fontFamily: 'sans-serif', fontWeight: 800, fontSize: '100px', opacity: 0.3 }} textAnchor="middle" dy=".3em">ANALYZE</text>
+              <circle cx="750" cy="250" r="15" fill="#ffffff" filter="url(#glow)" />
+
+              <text ref={textDesignRef} x="250" y="700" fill="#ffffff" style={{ fontFamily: 'sans-serif', fontWeight: 800, fontSize: '100px', opacity: 0.3 }} textAnchor="middle" dy=".3em">DESIGN</text>
+              <circle cx="250" cy="800" r="15" fill="#ffffff" filter="url(#glow)" />
+
+              <text ref={textBuildRef} x="1250" y="1250" fill="#ffffff" style={{ fontFamily: 'sans-serif', fontWeight: 800, fontSize: '100px', opacity: 0.3 }} textAnchor="middle" dy=".3em">BUILD</text>
+              <circle cx="1250" cy="1350" r="15" fill="#ffffff" filter="url(#glow)" />
+
+              <text ref={textDeliverRef} x="750" y="1800" fill="#ffffff" style={{ fontFamily: 'sans-serif', fontWeight: 800, fontSize: '100px', opacity: 0.3 }} textAnchor="middle" dy=".3em">DELIVER</text>
+              <circle cx="750" cy="1900" r="20" fill="#ffffff" filter="url(#glow)" />
+            </g>
+          </svg>
+        ) : (
+          <svg viewBox="0 0 3000 1500" className="w-full h-auto" style={{ overflow: 'visible' }}>
+            <path id="arc-path" d="M 400,1500 A 1100,1100 0 0,1 2600,1500" fill="none" stroke="none" />
+            {[
+              { text: 'ANALYZE', offset: '15%' }, { text: '●', offset: '27%' },
+              { text: 'DESIGN', offset: '38%' }, { text: '●', offset: '50%' },
+              { text: 'BUILD', offset: '62%' }, { text: '●', offset: '73%' },
+              { text: 'DELIVER', offset: '85%' },
+            ].map((item, i) => (
+              <text key={i} fill="#ffffff" style={{ fontFamily: 'sans-serif', fontWeight: 800, fontSize: item.text === '●' ? '50px' : '100px', textTransform: 'uppercase' }} dy={item.text === '●' ? '-18' : '0'}>
+                <textPath href="#arc-path" startOffset={item.offset} textAnchor="middle">{item.text}</textPath>
+              </text>
+            ))}
+          </svg>
+        )}
+      </div>
+
+
+@media (max-width: 1024px) {
+  .content-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-description p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .id-brand-group {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .huge-number {
+    font-size: 3rem;
+  }
+
+  .label {
+    font-size: 1rem;
+  }
+
+  .live-btn-star {
+    align-self: flex-start;
+  }
+
+  .content-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+    gap: 1rem;
+  }
+
+  .main-image {
+    height: 200px;
+    border-radius: 24px;
+  }
+
+  .project-description {
+    padding: 0.5rem 0;
+  }
+
+  .project-description p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .scroll-stack-card {
+    border-radius: 30px;
+  }
+
+  .scroll-stack-card>.inner-content {
+    border-radius: 30px !important;
+    padding: 1.5rem !important;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .huge-number {
+    font-size: 2.5rem;
+  }
+
+  .label {
+    font-size: 0.9rem;
+  }
+
+  .client-name {
+    font-size: 0.75rem;
+  }
+
+  .live-btn-star>.inner-content {
+    padding: 0.6rem 1.5rem !important;
+    font-size: 0.7rem;
+  }
+
+  .main-image {
+    height: 180px;
+  }
+
+  .project-description p {
+    font-size: 0.85rem;
+  }
+
+  .scroll-stack-card>.inner-content {
+    padding: 1rem !important;
+  }
+}
+
+<svg width="100%" height="100%" style={{ overflow: 'visible' }}>
+                    <path
+                        ref={bridgeLineRef}
+                        fill="none"
+                        stroke="#000"
+                        strokeLinecap="round"
+                        style={{
+                            strokeWidth: isMobile ? '0.8vw' : '10px', // Mathematically matches SelectedWorks
+                            strokeDasharray: '99999',
+                            strokeDashoffset: '99999'
+                        }}
+                    />
+                </svg>
+
+const skillCategories = [
+  {
+    link: "#",
+    text: "Languages",
+    items: [
+      { name: "C++", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" },
+      { name: "Python", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "Java", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" },
+      { name: "Javascript", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" },
+      { name: "PHP", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" },
+      { name: "SQL", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" },
+      { name: "React", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+      { name: "HTML/CSS", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      { name: "Numpy", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+      { name: "Pandas", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" }
+    ]
+  },
+  {
+    link: "#",
+    text: "Developer Tools",
+    items: [
+      { name: "VS Code", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+      { name: "PyCharm", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pycharm/pycharm-original.svg" },
+      { name: "Jupyter", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg" },
+      { name: "Bash", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg" },
+      { name: "Spyder", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spyder/spyder-original.svg" },
+      { name: "Colab", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecolab/googlecolab-original.svg" }
+    ]
+  },
+  {
+    link: "#",
+    text: "Technologies",
+    items: [
+      { name: "GitHub", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" },
+      { name: "Git", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+      { name: "Node", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "Postman", url: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg" }
+    ]
+  }
+];
+
+
+ <svg 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2.5" 
+          strokeLinecap="round" 
+          strokeLinejoin="round" 
+          className="menu__item-arrow"
+        >
+          <line x1="7" y1="17" x2="17" y2="7"></line>
+          <polyline points="7 7 17 7 17 17"></polyline>
+        </svg>
